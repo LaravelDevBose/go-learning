@@ -1,0 +1,7 @@
+.env
+.env.backup
+docker-compose.override.yml
+.idea/*
+/.idea
+/.vscode
+./docker/*

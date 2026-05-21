@@ -1,0 +1,51 @@
+package main
+
+import "fmt"
+
+func main() {
+	conferenceName := "Go Conference"
+	const conferenceTickets int = 50
+	var remainingTickets uint = 50
+
+	var bookings [50]string
+
+	fmt.Printf("conferenceTickets is %T, conferenceName is %T, remainingTickets is %T\n", conferenceTickets, conferenceName, remainingTickets)
+
+	fmt.Printf("Welcome to %v booking application\n", conferenceName)
+	fmt.Printf("we have total of %v tickets and %v are available\n", conferenceTickets, remainingTickets)
+	fmt.Println("Get your tickets here to attend")
+
+	var userName string
+	var firstName string
+	var lastName string
+	var email string
+	var userTickets uint
+	// ask user for their name
+
+	fmt.Print("Enter Your First Name: ")
+	fmt.Scan(&firstName)
+
+	fmt.Print("Enter your last name: ")
+	fmt.Scan(&lastName)
+
+	fmt.Print("Enter your email address: ")
+	fmt.Scan(&email)
+
+	fmt.Print("Enter number of tickets: ")
+	fmt.Scan(&userTickets)
+
+	userName = firstName + " " + lastName
+
+	remainingTickets = remainingTickets - userTickets
+
+	bookings[0] = firstName + " " + lastName
+
+	fmt.Printf("The whole array: %v\n", bookings)
+	fmt.Printf("The first element: %v\n", bookings[0])
+	fmt.Printf("Array type: %T\n", bookings)
+	fmt.Printf("Array lenght: %v\n", len(bookings))
+
+	fmt.Printf("Thank You %v for booking %v tickets. You will receive a confermation email at %v \n", userName, userTickets, email)
+	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+
+}
