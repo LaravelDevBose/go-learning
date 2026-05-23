@@ -1,6 +1,7 @@
 package main
 
 import (
+	"booking-app/helper"
 	"fmt"
 	"strings"
 )
@@ -11,6 +12,8 @@ var conferenceName = "Go Conference"
 var remainingTickets uint = 50
 var bookings []string
 
+var GlobalVaiable string = "When variable start with Capital latter then its become global vaiable can access from anyware of app"
+
 func main() {
 
 	greetUser()
@@ -19,7 +22,7 @@ func main() {
 
 		firstName, lastName, email, userTickets := getUserInputs()
 
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInputs(firstName, lastName, email, userTickets)
+		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInputs(firstName, lastName, email, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
@@ -61,14 +64,6 @@ func getFirstNames() []string {
 		firstnames = append(firstnames, name[0])
 	}
 	return firstnames
-}
-
-func validateUserInputs(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
-	isValidName := len(firstName) >= 2 && len(lastName) >= 2
-	isValidEmail := strings.Contains(email, "@")
-	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
-
-	return isValidName, isValidEmail, isValidTicketNumber
 }
 
 func getUserInputs() (string, string, string, uint) {
