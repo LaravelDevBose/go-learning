@@ -1,16 +1,15 @@
 package main
 
 import (
-	"booking-app/helper"
 	"fmt"
-	"strings"
+	"strconv"
 )
 
 const conferenceTickets int = 50
 
 var conferenceName = "Go Conference"
 var remainingTickets uint = 50
-var bookings []string
+var bookings = make([]map[string]string, 0)
 
 var GlobalVaiable string = "When variable start with Capital latter then its become global vaiable can access from anyware of app"
 
@@ -22,7 +21,7 @@ func main() {
 
 		firstName, lastName, email, userTickets := getUserInputs()
 
-		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInputs(firstName, lastName, email, userTickets, remainingTickets)
+		isValidName, isValidEmail, isValidTicketNumber := validateUserInputs(firstName, lastName, email, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
@@ -60,8 +59,7 @@ func greetUser() {
 func getFirstNames() []string {
 	firstnames := []string{}
 	for _, booking := range bookings {
-		var name = strings.Fields(booking)
-		firstnames = append(firstnames, name[0])
+		firstnames = append(firstnames, booking["firstName"])
 	}
 	return firstnames
 }
@@ -92,7 +90,14 @@ func getUserInputs() (string, string, string, uint) {
 func bookTicket(firstName string, lastName string, email string, userTickets uint) {
 	userName := firstName + " " + lastName
 	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, userName)
+
+	var bookingData = make(map[string]string)
+	bookingData["firstName"] = firstName
+	bookingData["lastName"] = lastName
+	bookingData["email"] = email
+	bookingData["numOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+
+	bookings = append(bookings, bookingData)
 
 	fmt.Printf("Thank You %v for booking %v tickets. You will receive a confermation email at %v \n", userName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
