@@ -41,20 +41,42 @@ func main() {
 		fmt.Print("Enter number of tickets: ")
 		fmt.Scan(&userTickets)
 
-		userName = firstName + " " + lastName
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@")
+		isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
 
-		remainingTickets = remainingTickets - userTickets
-		bookings = append(bookings, userName)
+		if isValidName && isValidEmail && isValidTicketNumber {
+			userName = firstName + " " + lastName
+			remainingTickets = remainingTickets - userTickets
+			bookings = append(bookings, userName)
 
-		fmt.Printf("Thank You %v for booking %v tickets. You will receive a confermation email at %v \n", userName, userTickets, email)
-		fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+			fmt.Printf("Thank You %v for booking %v tickets. You will receive a confermation email at %v \n", userName, userTickets, email)
+			fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 
-		firstnames := []string{}
-		for _, booking := range bookings {
-			var name = strings.Fields(booking)
-			firstnames = append(firstnames, name[0])
+			firstnames := []string{}
+			for _, booking := range bookings {
+				var name = strings.Fields(booking)
+				firstnames = append(firstnames, name[0])
+			}
+			fmt.Printf("The first names of bookings are : %v \n", firstnames)
+
+			if remainingTickets == 0 {
+				fmt.Println("Our conference is booked out. Come back next year.")
+				break
+			}
+
+		} else {
+			if !isValidName {
+				fmt.Println("First name or last name you enterd is too short")
+			}
+			if !isValidEmail {
+				fmt.Println("email address you entered dons't contain @ sign")
+			}
+			if !isValidTicketNumber {
+				fmt.Println("your number of ticket is invalid")
+			}
 		}
-		fmt.Printf("The first names of bookings are : %v \n", firstnames)
+
 	}
 
 }
