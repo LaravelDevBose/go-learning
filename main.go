@@ -2,14 +2,20 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 const conferenceTickets int = 50
 
 var conferenceName = "Go Conference"
 var remainingTickets uint = 50
-var bookings = make([]map[string]string, 0)
+var bookings = make([]BookingData, 0)
+
+type BookingData struct {
+	firstName    string
+	lastName     string
+	email        string
+	numOfTickets uint
+}
 
 var GlobalVaiable string = "When variable start with Capital latter then its become global vaiable can access from anyware of app"
 
@@ -59,7 +65,7 @@ func greetUser() {
 func getFirstNames() []string {
 	firstnames := []string{}
 	for _, booking := range bookings {
-		firstnames = append(firstnames, booking["firstName"])
+		firstnames = append(firstnames, booking.firstName)
 	}
 	return firstnames
 }
@@ -91,11 +97,12 @@ func bookTicket(firstName string, lastName string, email string, userTickets uin
 	userName := firstName + " " + lastName
 	remainingTickets = remainingTickets - userTickets
 
-	var bookingData = make(map[string]string)
-	bookingData["firstName"] = firstName
-	bookingData["lastName"] = lastName
-	bookingData["email"] = email
-	bookingData["numOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+	var bookingData = BookingData{
+		firstName:    firstName,
+		lastName:     lastName,
+		email:        email,
+		numOfTickets: userTickets,
+	}
 
 	bookings = append(bookings, bookingData)
 
