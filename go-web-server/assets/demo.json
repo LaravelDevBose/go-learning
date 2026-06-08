@@ -1,0 +1,5 @@
+{
+    "name": "Go Web Server",
+    "description": "A simple web server written in Go.",
+    "version": "1.0.0"
+}
