@@ -1,0 +1,9 @@
+.DS_Store
+/--- IGNORE ---
+.idea
+.vscode
+*.log
+*.exe
+*.dll
+*.so
+*.DS_Store
