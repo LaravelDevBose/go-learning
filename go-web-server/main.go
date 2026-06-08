@@ -16,5 +16,9 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello Go Lovvers!")
+	fmt.Fprintf(w, "Hello Go Lovvers! \n")
+	println("Received request for:", r.URL.Path)
+	println("Request method:", r.Method)
+	params := fmt.Sprintf("Request Params: %s\n", r.URL.Query().Get("name"))
+	fmt.Fprintf(w, "%s", params)
 }
